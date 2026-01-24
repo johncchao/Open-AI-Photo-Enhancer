@@ -1,6 +1,13 @@
 // Image data configuration
 const imageData = [
     {
+        inputSrc: 'res/input03_cropped.png',
+        outputSrc: 'res/output03_cropped.png',
+        algorithm: 'Super Resolution',
+        title: 'High-Resolution Reconstruction',
+        description: 'Reconstruct low-resolution images to high-resolution using ESRGAN algorithm with rich and natural details.'
+    },
+    {
         inputSrc: 'res/input01_cropped.png',
         outputSrc: 'res/output01_cropped.png',
         algorithm: 'Neural Texture Synthesis',
@@ -13,13 +20,6 @@ const imageData = [
         algorithm: 'Diffusion-based Denoiser',
         title: 'Low-Light Reconstruction',
         description: 'Restoration of Light and Shadow in a Dim Atmosphere'
-    },
-    {
-        inputSrc: 'res/input03_cropped.png',
-        outputSrc: 'res/output03_cropped.png',
-        algorithm: 'Super Resolution',
-        title: 'High-Resolution Reconstruction',
-        description: 'Reconstruct low-resolution images to high-resolution using ESRGAN algorithm with rich and natural details.'
     }
 ];
 
