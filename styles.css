@@ -79,15 +79,136 @@ header h1 {
     background: #0a0f1e;
 }
 
+.comparison-container {
+    cursor: pointer;
+    user-select: none;
+}
+
 .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    pointer-events: none;
 }
 
-.gallery-item:hover img {
-    transform: scale(1.05);
+.image-after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.image-before-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 2;
+}
+
+.image-before-overlay.visible {
+    opacity: 1;
+}
+
+.image-before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.press-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    z-index: 3;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+    transition: opacity 0.2s ease;
+}
+
+.press-hint.hidden {
+    opacity: 0;
+}
+
+.press-hint svg {
+    width: 20px;
+    height: 20px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.press-hint svg:first-child {
+    animation-delay: 0s;
+}
+
+.press-hint svg:last-child {
+    animation-delay: 1s;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.comparison-labels {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.status-label {
+    position: absolute;
+    top: 15px;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.label-before {
+    left: 15px;
+}
+
+.label-after {
+    right: 15px;
+}
+
+.status-label.visible {
+    opacity: 1;
 }
 
 .image-info {

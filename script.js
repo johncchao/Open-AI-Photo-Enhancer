@@ -1,44 +1,29 @@
 // Image data configuration
 const imageData = [
     {
-        src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop',
-        algorithm: 'AI Denoising',
-        title: 'Landscape Enhancement',
-        description: 'Remove image noise through deep learning algorithms while preserving details and improving overall clarity.'
+        inputSrc: 'res/input01_cropped.png',
+        outputSrc: 'res/output01_cropped.png',
+        algorithm: 'Neural Texture Synthesis',
+        title: 'Portrait Texture Recovery',
+        description: 'Extremely close up facial close-up restoration/generation'
     },
     {
-        src: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=600&h=400&fit=crop',
+        inputSrc: 'res/input02_cropped.png',
+        outputSrc: 'res/output02_cropped.png',
+        algorithm: 'Diffusion-based Denoiser',
+        title: 'Low-Light Reconstruction',
+        description: 'Restoration of Light and Shadow in a Dim Atmosphere'
+    },
+    {
+        inputSrc: 'res/input03_cropped.png',
+        outputSrc: 'res/output03_cropped.png',
         algorithm: 'Super Resolution',
         title: 'High-Resolution Reconstruction',
         description: 'Reconstruct low-resolution images to high-resolution using ESRGAN algorithm with rich and natural details.'
-    },
-    {
-        src: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=400&fit=crop',
-        algorithm: 'Detail Sharpening',
-        title: 'Edge Enhancement',
-        description: 'Intelligently identify and sharpen image edges to make the picture clearer and more defined.'
-    },
-    {
-        src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&fit=crop',
-        algorithm: 'Color Enhancement',
-        title: 'Smart Color Grading',
-        description: 'AI automatically analyzes scenes and optimizes color balance to make photos more vivid and vibrant.'
-    },
-    {
-        src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=400&fit=crop',
-        algorithm: 'Light Correction',
-        title: 'Exposure Optimization',
-        description: 'Intelligently adjust exposure and contrast to restore details in overexposed or underexposed areas.'
-    },
-    {
-        src: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&h=400&fit=crop',
-        algorithm: 'Style Transfer',
-        title: 'Artistic Processing',
-        description: 'Apply neural style transfer techniques to transform photos into specific artistic styles.'
     }
 ];
 
-// Render image gallery
+// Render image gallery with press-to-compare
 function renderGallery() {
     const gallery = document.getElementById('gallery');
     
@@ -48,8 +33,22 @@ function renderGallery() {
         galleryItem.style.animationDelay = `${index * 0.1}s`;
         
         galleryItem.innerHTML = `
-            <div class="image-container">
-                <img src="${item.src}" alt="${item.title}" loading="lazy">
+            <div class="image-container comparison-container">
+                <img src="${item.outputSrc}" alt="${item.title} - After" class="image-after" loading="lazy">
+                <div class="image-before-overlay">
+                    <img src="${item.inputSrc}" alt="${item.title} - Before" class="image-before" loading="lazy">
+                </div>
+                <div class="press-hint">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                    <span>Press to Compare</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </div>
+                <div class="status-label label-after">After</div>
+                <div class="status-label label-before">Before</div>
             </div>
             <div class="image-info">
                 <span class="algorithm-tag">${item.algorithm}</span>
@@ -60,11 +59,78 @@ function renderGallery() {
         
         gallery.appendChild(galleryItem);
     });
+    
+    // Initialize press-to-compare
+    initPressToCompare();
+}
+
+// Initialize press-to-compare functionality
+function initPressToCompare() {
+    const containers = document.querySelectorAll('.comparison-container');
+    
+    containers.forEach(container => {
+        const beforeOverlay = container.querySelector('.image-before-overlay');
+        const hint = container.querySelector('.press-hint');
+        const labelBefore = container.querySelector('.label-before');
+        const labelAfter = container.querySelector('.label-after');
+        
+        // Set initial state
+        labelAfter.classList.add('visible');
+        
+        // Mouse events
+        container.addEventListener('mousedown', (e) => {
+            beforeOverlay.classList.add('visible');
+            hint.classList.add('hidden');
+            labelBefore.classList.add('visible');
+            labelAfter.classList.remove('visible');
+            e.preventDefault();
+        });
+        
+        container.addEventListener('mouseup', () => {
+            beforeOverlay.classList.remove('visible');
+            hint.classList.remove('hidden');
+            labelBefore.classList.remove('visible');
+            labelAfter.classList.add('visible');
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            beforeOverlay.classList.remove('visible');
+            hint.classList.remove('hidden');
+            labelBefore.classList.remove('visible');
+            labelAfter.classList.add('visible');
+        });
+        
+        // Touch events for mobile
+        container.addEventListener('touchstart', (e) => {
+            beforeOverlay.classList.add('visible');
+            hint.classList.add('hidden');
+            labelBefore.classList.add('visible');
+            labelAfter.classList.remove('visible');
+            e.preventDefault();
+        });
+        
+        container.addEventListener('touchend', () => {
+            beforeOverlay.classList.remove('visible');
+            hint.classList.remove('hidden');
+            labelBefore.classList.remove('visible');
+            labelAfter.classList.add('visible');
+        });
+        
+        container.addEventListener('touchcancel', () => {
+            beforeOverlay.classList.remove('visible');
+            hint.classList.remove('hidden');
+            labelBefore.classList.remove('visible');
+            labelAfter.classList.add('visible');
+        });
+    });
 }
 
 // API documentation button click event
 document.addEventListener('DOMContentLoaded', () => {
     renderGallery();
+    
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
     
     const apiDocsBtn = document.getElementById('apiDocsBtn');
     apiDocsBtn.addEventListener('click', (e) => {
