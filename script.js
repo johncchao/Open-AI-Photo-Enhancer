@@ -171,13 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
-    
-    const apiDocsBtn = document.getElementById('apiDocsBtn');
-    apiDocsBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        // Replace with your actual API documentation link
-        window.open('https://github.com/johncchao/Open-AI-Photo-Enhancer/wiki/API-Documentation', '_blank');
-    });
 });
 
 // Image loading animation
