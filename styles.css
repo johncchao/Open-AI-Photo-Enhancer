@@ -160,6 +160,20 @@ header h1 {
     animation-delay: 1s;
 }
 
+.hint-mobile {
+    display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .hint-desktop {
+        display: none;
+    }
+    
+    .hint-mobile {
+        display: inline;
+    }
+}
+
 @keyframes pulse {
     0%, 100% {
         opacity: 0.5;

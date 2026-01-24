@@ -42,7 +42,8 @@ function renderGallery() {
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M9 18l6-6-6-6"/>
                     </svg>
-                    <span>Press to Compare</span>
+                    <span class="hint-desktop">Press to Compare</span>
+                    <span class="hint-mobile">Long Press to Compare</span>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M15 18l-6-6 6-6"/>
                     </svg>
@@ -100,27 +101,66 @@ function initPressToCompare() {
             labelAfter.classList.add('visible');
         });
         
-        // Touch events for mobile
+        // Touch events for mobile - improved to allow scrolling
+        let touchStartY = 0;
+        let touchStartTime = 0;
+        let isLongPress = false;
+        let longPressTimer = null;
+        
         container.addEventListener('touchstart', (e) => {
-            beforeOverlay.classList.add('visible');
-            hint.classList.add('hidden');
-            labelBefore.classList.add('visible');
-            labelAfter.classList.remove('visible');
-            e.preventDefault();
+            touchStartY = e.touches[0].clientY;
+            touchStartTime = Date.now();
+            isLongPress = false;
+            
+            // Set a timer for long press detection (300ms)
+            longPressTimer = setTimeout(() => {
+                isLongPress = true;
+                beforeOverlay.classList.add('visible');
+                hint.classList.add('hidden');
+                labelBefore.classList.add('visible');
+                labelAfter.classList.remove('visible');
+            }, 300);
+        });
+        
+        container.addEventListener('touchmove', (e) => {
+            const touchMoveY = e.touches[0].clientY;
+            const deltaY = Math.abs(touchMoveY - touchStartY);
+            
+            // If user moved more than 10px, it's a scroll, not a press
+            if (deltaY > 10) {
+                clearTimeout(longPressTimer);
+                if (isLongPress) {
+                    // If was showing before image, hide it
+                    beforeOverlay.classList.remove('visible');
+                    hint.classList.remove('hidden');
+                    labelBefore.classList.remove('visible');
+                    labelAfter.classList.add('visible');
+                    isLongPress = false;
+                }
+            }
+            
+            // Only prevent default if it's a long press (not scrolling)
+            if (isLongPress) {
+                e.preventDefault();
+            }
         });
         
         container.addEventListener('touchend', () => {
+            clearTimeout(longPressTimer);
             beforeOverlay.classList.remove('visible');
             hint.classList.remove('hidden');
             labelBefore.classList.remove('visible');
             labelAfter.classList.add('visible');
+            isLongPress = false;
         });
         
         container.addEventListener('touchcancel', () => {
+            clearTimeout(longPressTimer);
             beforeOverlay.classList.remove('visible');
             hint.classList.remove('hidden');
             labelBefore.classList.remove('visible');
             labelAfter.classList.add('visible');
+            isLongPress = false;
         });
     });
 }
