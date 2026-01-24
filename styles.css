@@ -130,7 +130,7 @@ header h1 {
     display: flex;
     align-items: center;
     gap: 12px;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.3);
     color: white;
     padding: 12px 24px;
     border-radius: 30px;
@@ -200,7 +200,7 @@ header h1 {
 .status-label {
     position: absolute;
     top: 15px;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 8px 16px;
     border-radius: 8px;
