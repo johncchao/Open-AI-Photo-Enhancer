@@ -21,8 +21,8 @@ Standard upscalers often create "plastic" textures. Our lab focuses on **Latent 
 
 We believe in "Show, Don't Just Tell." You can test our neural network performance directly through our private compute interface:
 
-1. **Join the Community**: [MEE - Private AI Lab (Telegram Channel)](https://www.google.com/search?q=https://t.me/PrivateAILab) - *Daily 4K AI showcases and technical updates.*
-2. **Instant Enhancement**: [Media Enhance Bot](https://www.google.com/search?q=https://t.me/media_enhance_bot) - *Send your photos directly to our 3090 cluster for a real-time demo.*
+1. **Join the Community**: [MEE - Private AI Lab (Telegram Channel)](https://t.me/PrivateAILab) - *Daily 4K AI showcases and technical updates.*
+2. **Instant Enhancement**: [Media Enhance Bot](https://t.me/media_enhance_bot) - *Send your photos directly to our 3090 cluster for a real-time demo.*
 
 ---
 
