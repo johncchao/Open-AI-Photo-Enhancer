@@ -341,6 +341,31 @@ footer {
     margin-top: 60px;
 }
 
+footer p {
+    margin: 8px 0;
+}
+
+.visitor-stats {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 10px;
+}
+
+.visitor-stats span {
+    display: inline-block;
+}
+
+.visitor-stats .separator {
+    margin: 0 15px;
+    opacity: 0.5;
+}
+
+.visitor-stats #busuanzi_value_site_pv,
+.visitor-stats #busuanzi_value_site_uv {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
 
 
 @media (max-width: 768px) {
