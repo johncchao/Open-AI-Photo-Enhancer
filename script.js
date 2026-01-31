@@ -171,7 +171,42 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
+    
+    // Initialize dynamic GPU queue
+    initGPUQueue();
 });
+
+// Dynamic GPU Queue Simulation
+function initGPUQueue() {
+    const queueNum = document.getElementById('queue-num');
+    const latencyNum = document.getElementById('latency-num');
+    const activeUsers = document.getElementById('active-users');
+    const queueMessage = document.getElementById('queue-message');
+    
+    // Simulate queue changes every 3-8 seconds
+    function updateQueue() {
+        const tasks = Math.floor(Math.random() * 6) + 2; // 2-7 tasks
+        const latency = (Math.random() * 1.5 + 0.8).toFixed(1); // 0.8-2.3s
+        const users = Math.floor(Math.random() * 15) + 8; // 8-22 users
+        
+        queueNum.textContent = `${tasks} TASKS`;
+        latencyNum.textContent = `${latency}s`;
+        activeUsers.textContent = users;
+        
+        // Add flash animation
+        queueNum.style.animation = 'none';
+        setTimeout(() => {
+            queueNum.style.animation = 'glow-pulse 2.5s ease-in-out infinite';
+        }, 10);
+        
+        // Schedule next update (3-8 seconds)
+        const nextUpdate = Math.random() * 5000 + 3000;
+        setTimeout(updateQueue, nextUpdate);
+    }
+    
+    // Start after 2 seconds
+    setTimeout(updateQueue, 2000);
+}
 
 // Image loading animation
 const observerOptions = {

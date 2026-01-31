@@ -329,7 +329,7 @@ header h1 .logo-hub {
 }
 .compute-status {
     font-size: 0.85rem;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     color: var(--ph-light-grey);
@@ -342,6 +342,155 @@ header h1 .logo-hub {
     margin-right: 8px;
     box-shadow: 0 0 0 rgba(255, 165, 0, 0.4);
     animation: pulse 2s infinite;
+}
+
+/* GPU Task Queue Panel */
+.gpu-queue-panel {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 20px 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 165, 0, 0.1);
+}
+
+.hacker-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+}
+
+.status-item .label {
+    color: #888;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.status-item .value {
+    color: var(--ph-white);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.green-glow {
+    color: #00ff88 !important;
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+    animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.orange-glow {
+    color: var(--ph-orange) !important;
+    text-shadow: 0 0 8px rgba(255, 165, 0, 0.6);
+    animation: glow-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        text-shadow: 0 0 8px currentColor;
+    }
+    50% {
+        text-shadow: 0 0 15px currentColor, 0 0 20px currentColor;
+    }
+}
+
+.queue-hint {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: rgba(255, 165, 0, 0.08);
+    border-left: 3px solid var(--ph-orange);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--ph-light-grey);
+}
+
+.queue-hint svg {
+    flex-shrink: 0;
+    color: var(--ph-orange);
+}
+
+.queue-hint strong {
+    color: var(--ph-orange);
+    font-weight: 700;
+}
+
+/* Enhanced Telegram Button */
+.btn-telegram-primary {
+    background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+    color: var(--ph-white);
+    padding: 18px 36px;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4);
+    border: 2px solid #0099dd;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-telegram-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-telegram-primary:hover::before {
+    left: 100%;
+}
+
+.btn-telegram-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(0, 136, 204, 0.6);
+    background: linear-gradient(135deg, #0099dd 0%, #0077aa 100%);
+}
+
+.telegram-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.3;
+}
+
+.telegram-text strong {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.telegram-text small {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+/* Smaller Secondary Button */
+.btn-secondary-small {
+    background: transparent;
+    color: var(--ph-light-grey);
+    border: 1px solid #444;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.btn-secondary-small:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--ph-white);
+    border-color: #666;
+    transform: translateY(-1px);
+    opacity: 1;
 }
 
 footer {
@@ -400,5 +549,27 @@ footer p {
     
     .btn {
         justify-content: center;
+    }
+    
+    .hacker-status {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .status-item {
+        font-size: 0.75rem;
+    }
+    
+    .queue-hint {
+        font-size: 0.85rem;
+    }
+    
+    .btn-telegram-primary {
+        padding: 16px 28px;
+        font-size: 1rem;
+    }
+    
+    .telegram-text strong {
+        font-size: 1rem;
     }
 }
