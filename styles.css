@@ -475,6 +475,17 @@ header h1 .logo-hub {
     font-weight: 400;
 }
 
+/* Paused Service Button */
+.btn-paused {
+    background: rgba(255, 255, 255, 0.05);
+    color: #888;
+    border: 1px dashed #555;
+    padding: 16px 28px;
+    font-size: 0.95rem;
+    cursor: default;
+    opacity: 0.7;
+}
+
 /* Smaller Secondary Button */
 .btn-secondary-small {
     background: transparent;
